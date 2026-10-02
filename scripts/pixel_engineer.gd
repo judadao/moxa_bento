@@ -1,11 +1,22 @@
 extends Control
 ## Original code-drawn pixel art. All coordinates are on a 180 × 112 pixel grid.
 const INK = Color("171c30")
+var appearance := 0
+var custom_texture: Texture2D
 
 func block(x: float, y: float, w: float, h: float, color: String) -> void:
+	if appearance == 1:
+		color = {"#3b747f": "#8266a7", "#315b6c": "#624e86", "#598b91": "#ad8bc0", "#274b5c": "#4b3e71"}.get(color, color)
+	elif appearance == 2:
+		color = {"#3b747f": "#bb805e", "#315b6c": "#895d52", "#598b91": "#d6a070", "#274b5c": "#694b49"}.get(color, color)
 	draw_rect(Rect2(x, y, w, h), Color(color))
 
 func _draw() -> void:
+	if custom_texture:
+		var ratio := minf(size.x / custom_texture.get_width(), size.y / custom_texture.get_height())
+		var fitted := custom_texture.get_size() * ratio
+		draw_texture_rect(custom_texture, Rect2((size - fitted) / 2, fitted), false)
+		return
 	draw_set_transform(Vector2(0, 0), 0, Vector2(2, 2))
 	# A little pool of midnight, stepped edges, no background panel.
 	block(15, 101, 149, 5, "#171c3055")
@@ -135,3 +146,48 @@ func _draw() -> void:
 	block(154, 12, 8, 3, "#eacb94")
 	block(170, 23, 1, 5, "#87a3b4")
 	block(168, 25, 5, 1, "#87a3b4")
+	if appearance == 1:
+		# Xiao Zi: long dark-purple hair, side ponytail, no glasses.
+		block(51, 21, 29, 13, "#332b49")
+		block(54, 18, 22, 7, "#332b49")
+		block(50, 31, 10, 33, "#332b49")
+		block(47, 38, 9, 26, "#332b49")
+		block(51, 34, 4, 26, "#615075")
+		block(48, 61, 7, 5, "#615075")
+		block(60, 31, 21, 15, "#edb99f")
+		block(63, 45, 15, 5, "#edb99f")
+		block(76, 31, 5, 4, "#332b49")
+		block(60, 30, 13, 4, "#332b49")
+		block(59, 32, 4, 7, "#332b49")
+		block(55, 22, 17, 3, "#615075")
+		block(49, 33, 8, 3, "#d596b7")
+		block(65, 37, 3, 4, "#302b43")
+		block(76, 37, 3, 4, "#302b43")
+		block(66, 37, 1, 1, "#fff0d4")
+		block(77, 37, 1, 1, "#fff0d4")
+		block(63, 42, 5, 2, "#dd8f99")
+		block(76, 42, 4, 2, "#dd8f99")
+		block(71, 46, 4, 1, "#975e77")
+	elif appearance == 2:
+		# Xiao Li: chestnut bob, hair clip, round glasses, warm sweater.
+		block(51, 22, 30, 24, "#55384a")
+		block(55, 18, 22, 10, "#55384a")
+		block(52, 41, 9, 10, "#55384a")
+		block(79, 30, 5, 18, "#55384a")
+		block(54, 26, 4, 20, "#956476")
+		block(59, 31, 21, 17, "#edb99f")
+		block(63, 46, 14, 4, "#edb99f")
+		block(59, 28, 18, 7, "#55384a")
+		block(58, 31, 6, 8, "#55384a")
+		block(57, 22, 16, 3, "#956476")
+		block(57, 32, 6, 2, "#e6c584")
+		block(62, 36, 8, 6, "#624052")
+		block(73, 36, 8, 6, "#624052")
+		block(70, 37, 3, 1, "#624052")
+		block(64, 37, 4, 3, "#e2dac4")
+		block(75, 37, 4, 3, "#e2dac4")
+		block(66, 38, 2, 2, "#55384a")
+		block(77, 38, 2, 2, "#55384a")
+		block(63, 43, 5, 2, "#d98b8e")
+		block(76, 43, 4, 2, "#d98b8e")
+		block(70, 47, 5, 1, "#975e77")

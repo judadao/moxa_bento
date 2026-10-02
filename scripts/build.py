@@ -12,7 +12,7 @@ for platform, preset in (("linux", "Linux"), ("windows", "Windows")):
     (destination / "bin").mkdir(parents=True, exist_ok=True)
     (root / "build" / ".gdignore").touch()
     subprocess.run([godot, "--headless", "--path", str(root), "--export-release", preset], check=True)
-    for name in ("run.py", "requirements.txt", "README.md", f"setup-{platform}.{'bat' if platform == 'windows' else 'sh'}", f"start-{platform}.{'bat' if platform == 'windows' else 'sh'}"):
+    for name in ("run.py", "bridge_runner.py", "requirements.txt", "README.md", f"setup-{platform}.{'bat' if platform == 'windows' else 'sh'}", f"start-{platform}.{'bat' if platform == 'windows' else 'sh'}"):
         shutil.copy2(root / name, destination / name)
     shutil.copytree(root / "companion", destination / "companion", dirs_exist_ok=True, ignore=shutil.ignore_patterns("__pycache__"))
     shutil.copytree(root / "assets/fonts", destination / "licenses/fonts", dirs_exist_ok=True, ignore=shutil.ignore_patterns("*.import"))

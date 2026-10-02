@@ -40,6 +40,8 @@ class FoodCourtHTML(HTMLParser):
         elif tag == "option" and self.select:
             self.option = []
             self.option_value = attrs.get("value", "")
+        elif tag == "br" and self.cell is not None:
+            self.cell.append(" / ")
 
     def handle_data(self, data):
         if self.cell is not None:
@@ -81,7 +83,7 @@ def option_date(text, today):
     return min(candidates, key=lambda d: abs((d - today).days)) if candidates else None
 
 
-def parse_orders(html, today):
+def parse_reservations(html, today):
     page = FoodCourtHTML()
     page.feed(html)
     if not page.logged_in:
@@ -93,6 +95,7 @@ def parse_orders(html, today):
     if not available:
         raise UnrecognizedPage("無法辨識可預約日期")
     lunches = set()
+    reservations = []
     for row in matches[0][1:]:
         # The known empty-state row is safe only with an explicit empty message.
         if len(row) == 1 and re.fullmatch(r"(?:目前)?(?:尚無|沒有|無)(?:任何)?(?:預約|訂餐)?(?:資料|紀錄|記錄)", row[0]):
@@ -103,7 +106,16 @@ def parse_orders(html, today):
         if not match or not row[1] or not row[2]:
             raise UnrecognizedPage("預約資料不完整，暫停漏訂判斷")
         if "午餐" in row[1]:
-            lunches.add(date.fromisoformat(match.group()))
+            day = date.fromisoformat(match.group())
+            lunches.add(day)
+            content = re.sub(r"^訂餐內容\s*[：:]\s*", "", row[2]).strip(" / ")
+            reservations.append({"date": day.isoformat(), "meal_type": row[1],
+                                 "content": content, "location": row[4]})
+    return available, lunches, reservations
+
+
+def parse_orders(html, today):
+    available, lunches, _ = parse_reservations(html, today)
     return available, lunches
 
 
@@ -120,6 +132,8 @@ def week_status(available, lunches, today, offset=0):
 
 def snapshot(html, today=None):
     today = today or datetime.now(TAIPEI).date()
-    available, lunches = parse_orders(html, today)
+    available, lunches, reservations = parse_reservations(html, today)
     return {"status": "ok", "checked_at": datetime.now(TAIPEI).isoformat(),
-            "today": today.isoformat(), "weeks": [week_status(available, lunches, today, i) for i in (0, 1)]}
+            "today": today.isoformat(),
+            "today_lunch": [r for r in reservations if r["date"] == today.isoformat()],
+            "weeks": [week_status(available, lunches, today, i) for i in (0, 1)]}

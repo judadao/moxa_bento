@@ -70,6 +70,16 @@ class OrdersTest(unittest.TestCase):
         _, lunches = parse_orders(page([meal('2026-10-05'), meal('2026-10-05')]), date(2026, 10, 5))
         self.assertEqual(lunches, {date(2026, 10, 5)})
 
+    def test_today_menu_excludes_dinner_and_other_days(self):
+        result = snapshot(page([meal('2026-10-05'), meal('2026-10-05', '晚餐'), meal('2026-10-06')]), date(2026, 10, 5))
+        self.assertEqual(len(result['today_lunch']), 1)
+        self.assertEqual(result['today_lunch'][0]['content'], '測試餐 * 1')
+        self.assertEqual(result['today_lunch'][0]['location'], '總部')
+
+    def test_today_multiple_meals_keep_their_content(self):
+        result = snapshot(page([meal('2026-10-05'), meal('2026-10-05')]), date(2026, 10, 5))
+        self.assertEqual(len(result['today_lunch']), 2)
+
 
 if __name__ == '__main__':
     unittest.main()

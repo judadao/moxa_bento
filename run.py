@@ -8,6 +8,8 @@ import subprocess
 import sys
 import threading
 
+from companion.runtime import data_directory, lock_instance
+
 ROOT = Path(__file__).resolve().parent
 
 
@@ -20,23 +22,10 @@ def main():
     executable = args.godot or (str(packaged) if packaged.exists() else None) or os.environ.get("GODOT_BIN") or shutil.which("godot") or shutil.which("godot4")
     if not executable:
         parser.error("找不到 Godot。請安裝 Godot 4.4+ 並設定 GODOT_BIN，或使用 --godot 指定執行檔。")
-    if os.name == "nt":
-        folder = Path(os.environ.get("LOCALAPPDATA", Path.home() / "AppData/Local")) / "BentoBuddy"
-    else:
-        folder = Path(os.environ.get("XDG_DATA_HOME", Path.home() / ".local/share")) / "bento-buddy"
-    folder.mkdir(parents=True, exist_ok=True, mode=0o700)
+    folder = data_directory()
     # OS-managed lock is automatically released after a crash; no stale lock cleanup needed.
-    lock = (folder / "instance.lock").open("a+b")
     try:
-        if os.name == "nt":
-            import msvcrt
-            lock.write(b"0")
-            lock.flush()
-            lock.seek(0)
-            msvcrt.locking(lock.fileno(), msvcrt.LK_NBLCK, 1)
-        else:
-            import fcntl
-            fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        lock = lock_instance(folder)
     except OSError:
         parser.error("便當小夜班已經在執行。")
     stop = threading.Event()
