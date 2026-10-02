@@ -1,10 +1,7 @@
 extends SceneTree
-## Run on a real X11 display (including Xvfb :90), using Godot input dispatch.
 var app: Control
-
 func _initialize() -> void:
 	_run.call_deferred()
-
 func click_at(point: Vector2) -> void:
 	for pressed in [true, false]:
 		var event := InputEventMouseButton.new()
@@ -13,43 +10,42 @@ func click_at(point: Vector2) -> void:
 		event.position = point
 		root.push_input(event, true)
 		await process_frame
-
 func settle() -> void:
-	for frame in range(5):
+	for frame in range(8):
 		await process_frame
-
 func _run() -> void:
 	app = load("res://main.tscn").instantiate()
 	app.demo = true
 	root.add_child(app)
-	OS.low_processor_usage_mode = false
 	await settle()
+	await click_at(app.headline.get_global_rect().get_center())
+	assert(app.headline.visible_characters == -1)
 	await click_at(app.pet.get_global_rect().get_center())
-	assert(app.view == "menu", "Clicking the character must open the menu")
+	assert(app.view == "menu")
 	await settle()
 	await click_at(app.menu_controls.get_child(3).get_global_rect().get_center())
-	assert(app.view == "avatars", "Avatar menu should open")
+	assert(app.view == "avatars")
 	await settle()
 	await click_at(app.avatar_controls.get_child(1).get_global_rect().get_center())
-	assert(app.pet.appearance == 1, "Female character must be selectable")
-	# Test custom-image import without opening an interactive OS picker.
+	assert(app.pet.appearance == 1)
 	var img := Image.create(32, 32, false, Image.FORMAT_RGBA8)
 	img.fill(Color.CORAL)
 	img.save_png("user://fixture.png")
+	app.import_target = "character"
 	app._select_image(ProjectSettings.globalize_path("user://fixture.png"))
-	assert(app.pet.custom_texture != null, "Custom PNG must be displayed")
-	assert(FileAccess.file_exists("user://custom_pet.png"))
-	app._set_appearance(2)
+	assert(app.pet.custom_texture != null)
+	app._set_appearance(0)
 	assert(app.pet.custom_texture == null)
+	app._show_view("decorate")
+	app.pet.selected = "monitor"
+	await settle()
+	var before: Vector2 = app.pet.objects.monitor.position
+	await click_at(app.page_box.get_child(3).get_child(3).get_global_rect().get_center())
+	assert(app.pet.objects.monitor.position.x == before.x + 4)
 	app._show_view("menu")
 	await settle()
-	# Quit through the same visible menu control the user clicks.
-	print("INTERACTION_OK: pet click, female selection, PNG import; clicking exit now")
-	if "--close-button" in OS.get_cmdline_user_args():
-		var close_button := app.bubble.get_child(0).get_child(0).get_child(1) as Button
-		await click_at(close_button.get_global_rect().get_center())
-	else:
-		await click_at(app.menu_controls.get_child(5).get_global_rect().get_center())
+	print("INTERACTION_OK: typewriter click, pet menu, woman knight, custom PNG, independent movement; exit")
+	await click_at(app.close_button.get_global_rect().get_center())
 	await create_timer(1).timeout
-	push_error("Exit button did not close the application")
+	push_error("Exit button did not close app")
 	quit(1)

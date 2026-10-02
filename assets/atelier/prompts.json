@@ -1,0 +1,77 @@
+{
+  "mode": "built-in image_gen",
+  "direction": "Detailed pixel density; frontal body and desk; angled monitor back on left; work looks left, dialogue turns front. No claim of hand-drawn artwork.",
+  "working_knight": "Production TRUE LOW RESOLUTION PIXEL ART animation sprite sheet. Art direction: deliberately hand-clustered 1990s/modern indie RPG sprites, drawn as if on a STRICT 64px wide by 96px tall logical grid per character, enlarged with nearest neighbor only. Restrained 16-color palette, large clean connected clusters, exactly 3 tones for steel (blue-gray shadow, muted silver middle, ivory edge); matte armor. ABSOLUTELY NO gradients, painted texture, dithering, grain, speckles, glints, bloom, realistic metallic reflections, soft shading, tiny microdetails, or 3D rendering. Crisp clearly countable SQUARE PIXELS. Character adult armored knight with enclosed steel helmet and small dark red plume, simple recognizable angular pauldrons and breastplate. FRONT VIEW body, seated squarely facing viewer, BOTH shoulders and knees symmetric, feet pointing forward. We see a frontal seated office worker, NOT side/profile view and NOT three-quarter body. Head is turned slightly toward the LEFT side of the IMAGE as if watching a monitor there. Forearms extend horizontally forward onto imaginary keyboard at waist height; hands visible, knees bent, lower legs hang downward, boots point toward viewer. No desk, no chair, no monitor, no scenery. Transparent background. EIGHT frames in a perfectly regular FOUR COLUMNS TWO ROWS grid, each equal cell. First row and second row are the same centered seated FRONT VIEW knight, stable pelvis/boots alignment. Frames animate small alternating hand typing movements and gentle head dip/breathing, red plume moves one logical pixel. Do not change camera, body orientation or size between frames. Each character centered with 15% transparent margin. Game sprite, modest stylized adult proportions (head approx1/5 total seated height), not giant chibi head. Cold shadow + small warm highlight ONLY as flat colors. Reference provided only to indicate identity (closed silver armor red plume), DO NOT COPY its texture, lighting, pose or viewpoint.",
+  "characters": [
+    [
+      "female_front",
+      "Create EIGHT animation frames in FOUR columns TWO rows, transparent RGBA sprite sheet, each equal cell portrait-shaped. Reference 1 is the adult blonde woman knight identity: blonde bob with bangs, gray eyes, dark silver armor, tan trousers. Reference 2 is EXACT pixel rendering and FRONTAL SEATED BODY perspective to match. Same detailed hand-clustered pixel density as reference2, but retain female identity and armor from reference1. Not shiny AI painting: matte segmented steel, deliberate connected pixel clusters, limited restrained colors, no noisy micro-highlights, no smooth shading, no glowing edges. Full seated body FRONT VIEW: both shoulders and knees face directly toward viewer, symmetric torso, boots below bent knees. Head turned slightly toward LEFT SIDE OF IMAGE looking at her computer. Hands at waist in typing pose on invisible keyboard. NO desk, chair, screen, props or scenery. Eight small frame-to-frame motions: alternate typing hands, gentle breathing, frame4 tired blink, stable seated hips and boots in same position. Adult proportions, no excessive giant head. Keep figure inside each cell, all eight same scale and anchor; no camera change. Fine pixels, legible face.",
+      [
+        "/home/judd/Downloads/953489e4631f45e2feaf0260b5d4cee2.jpg",
+        "/home/judd/.codex/generated_images/01a0fba7-bace-78d1-9f58-0004318ae963/exec-fd5f752f-9ba0-402c-ac8a-a5bc24e93f67.png"
+      ]
+    ],
+    [
+      "knight_talk",
+      "EDIT this eight-frame pixel sprite sheet into the same seated knight TALKING TO VIEWER. Keep FOUR columns TWO rows, same canvas aspect ratio, exact same pixel art density, character size, body frontal seated pose, hips and feet anchor, palette and armor. Transparent RGBA. Change only head orientation and tiny hand gesture: frame1 helmet still angled slightly LEFT, frame2 helmet half turns toward viewer, frame3 helmet faces STRAIGHT FORWARD symmetrically and looks directly at viewer, frame4 frontal helmet slight nod, frame5 frontal helmet neutral, frame6 frontal helmet tiny nod and right gauntlet slight friendly gesture, frame7 frontal neutral, frame8 frontal neutral. Frames3-8 must all face straight toward camera, never side view. No mouth needed under enclosed helmet. Preserve clean connected pixel clusters, matte armor, no bright halos, no new objects. No desk, chair, text or background.",
+      [
+        "/home/judd/.codex/generated_images/01a0fba7-bace-78d1-9f58-0004318ae963/exec-fd5f752f-9ba0-402c-ac8a-a5bc24e93f67.png"
+      ]
+    ]
+  ],
+  "corrected_assets": [
+    [
+      "female_talk",
+      "Edit the supplied eight-frame seated female knight sprite sheet. Preserve exact FOUR columns TWO rows, canvas dimensions, palette, pixel density, outfit, frontal seated body, scale and boot/pelvis anchor. ONLY change face direction and tiny gesture: frame1 face slightly LEFT as original; frame2 half turns toward viewer; frame3 looks directly FRONT at viewer with both eyes symmetrically visible, frame4 front-facing soft blink, frame5 front-facing neutral with a small speaking mouth, frame6 front-facing small friendly hand gesture and closed mouth, frame7 front-facing open speaking mouth, frame8 front-facing neutral. Frames3 through8 ALL look directly at camera. Never turn body sideways. Practical adult woman, blonde bob haircut and steel armor. Transparent background. No desk, chair, added props, text, logos or glow. Keep delicate connected pixel clusters, avoid painterly highlights.",
+      [
+        "/home/judd/.codex/generated_images/01a0fba7-bace-78d1-9f58-0004318ae963/exec-10cfdd66-8983-4b44-ae6b-4818d29844e9.png"
+      ]
+    ],
+    [
+      "monitor_fixed",
+      "Remove EVERY HUMAN FIGURE, every chair, and any non-monitor objects from ALL FOUR cells. Keep ONLY the four dark MONITOR BACKS with their stands. The resulting transparent sprite sheet must contain precisely four standalone monitors, NOTHING ELSE. Keep the exact monitor pixels, shape, perspective, small cyan edge, and positions from the input. Repair transparent empty space where the women and chairs were. No people, no desk, no keyboard, no shadow blob, no scenery. Preserve 2 columns2 rows and current canvas size. True transparent RGBA.",
+      [
+        "/home/judd/.codex/generated_images/01a0fba7-bace-78d1-9f58-0004318ae963/exec-f1356691-370f-4f91-b384-3fe28a25e49c.png"
+      ]
+    ],
+    [
+      "window_fixed",
+      "Remove ALL people, ALL desks, ALL chairs, ALL computers and ALL foreground objects in each of the FOUR panels. Keep ONLY a standalone rectangular framed WINDOW with rainy blue night city inside it, on transparent background. Reconstruct the missing lower window city area formerly hidden by people and furniture. No surrounding wall. Maintain four frames in 2columns2rows, identical window size and frontal perspective in every frame. No desk or ledge wide enough to look like desk. Same restrained detailed pixel clusters, muted purple/blue palette, little amber city windows. Rain streaks vary across four frames. Absolutely no people or furnishings anywhere. Transparent RGBA beyond the window frame.",
+      [
+        "/home/judd/.codex/generated_images/01a0fba7-bace-78d1-9f58-0004318ae963/exec-d50cc7f5-711b-4fa1-a8df-d161562b3ebf.png"
+      ]
+    ]
+  ],
+  "props": [
+    [
+      "desk_front",
+      "An empty broad modern wooden office desk: tabletop FRONT EDGE exactly HORIZONTAL, left and right slim dark metal legs vertical and symmetric, narrow visible tabletop, no three-quarter side views, no chair or items. Desk width-to-height ratio 3.3:1. All four frames geometry identical, subtle four-frame gentle warm reflected-light change across a small part of tabletop, not bouncing furniture. Matte walnut wood with a few intentional grain clusters, low clutter."
+    ],
+    [
+      "monitor_back",
+      "ONLY an angled modern LCD monitor seen from its REAR, on its slim stand. In final scene monitor sits on LEFT side of desktop and is turned to face a coworker at CENTER BEHIND it: viewer sees dark gray matte monitor BACK panel, not screen. The left screen edge is slightly farther from viewer than right edge, only a sliver of cyan screen glow on RIGHT edge facing coworker. Narrow stand base horizontal resting on frontal desk plane. Minimal rear vents, one small power indicator. Four frames animate a tiny status LED and cyan edge glow, absolutely no monitor rotation. NO keyboard, desk, text, logos."
+    ],
+    [
+      "chair_front",
+      "ONLY a dark fabric modern office task CHAIR seen exactly from FRONT: symmetric backrest with simple lumbar stitching, short armrests, visible seat, piston and five-star caster base. Seated worker will cover its center. Muted charcoal violet, highlights restrained. Four frames slightly change a small patch of warm illumination, chair geometry fixed. No people, no desk."
+    ],
+    [
+      "window_front",
+      "ONLY a rectangular office WINDOW, exactly FRONT view, vertical and horizontal dark slim frame bars; blue purple quiet night city with a few distant amber windows and moon visible inside window. No perspective tilt, no plants, no furniture, no exterior wall. Four frames animate pixel rain streaks moving downward, city silhouette and frame remain precisely stationary. Atmospheric depth through flatter distant silhouettes, not noisy detailed skyscrapers. Object width-to-height1.1:1."
+    ],
+    [
+      "lamp_front",
+      "ONLY a small brass desk LAMP, front orthographic view, shade angled down-left, vertical articulated stem and horizontal oval base. Muted warm brass, cream light inside shade. Four distinct frames of subtly shifting small amber illumination clusters below shade, keep entire lamp body and base identical. No coffee mug, no table, no extended huge glow, no extra items."
+    ],
+    [
+      "coffee_front",
+      "ONLY a ceramic COFFEE MUG with handle on right, front orthographic view, slightly visible dark coffee surface, muted ivory ceramic, tiny flat amber highlight and slate shadow. Four distinct frames of a slender two-cluster steam wisp gently curling above cup, cup stays exactly fixed. No saucer, no desk, no lamp. Proportions mug small, no oversized steam cloud."
+    ],
+    [
+      "plant_front",
+      "ONLY a small modern office POTTED PLANT, front orthographic view, restrained olive and sage leaves with grouped clean pixel silhouettes, matte terracotta square pot with slight visible top. Four frames of gentle one-pixel leaf tip movement while pot is fixed. No desk, no window, no glitter, no flowers, no other objects."
+    ]
+  ],
+  "keyboard": "Transparent RGBA PIXEL ART production sprite sheet: FOUR identical compact dark-gray computer KEYBOARDS, TWO columns TWO rows, nothing else anywhere. Detailed crisp pixel clusters, restrained muted charcoal and slate keys, tiny cyan status LED. Each keyboard seen FROM FRONT at shallow 10 degree downward angle, its long front edge perfectly horizontal. Keyboard width-to-height ratio about 5:1. All four have precisely the same size, geometry and location within equal cells; animation changes only a tiny cursor/power LED and two slightly depressed keys. No hands, no people, no desk, no monitors, no scene, no text, no logos, no bloom, no background. Just FOUR separate small frontal keyboards on transparency.",
+  "props_common_prompt": "Production sprite sheet for a Godot pixel art desktop companion. TRUE detailed pixel art, clustered flat shades and crisp deliberate pixel edges, restrained muted palette, like a carefully hand-drawn detailed RPG sprite. Match steel knight reference style. NO smooth gradients, NO photoreal textures, NO bloom, NO speckled highlight noise, NO painterly rendering. Transparent RGBA background. Exactly FOUR frames, TWO columns TWO rows, perfectly regular equal cells, same camera and size and stable anchor. No labels. Camera is FRONT-ON ORTHOGRAPHIC, near eye level, tiny 5 degree view down onto top surfaces, ALL horizontal edges of desk/window remain HORIZONTAL. This is a modern office seen straight from the front by a visitor; seated worker behind desk faces viewer."
+}

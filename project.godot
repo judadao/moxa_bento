@@ -7,10 +7,10 @@ run/main_scene="res://main.tscn"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 
 [display]
-window/size/viewport_width=440
-window/size/viewport_height=640
-window/size/window_width_override=440
-window/size/window_height_override=640
+window/size/viewport_width=520
+window/size/viewport_height=720
+window/size/window_width_override=520
+window/size/window_height_override=720
 window/size/resizable=false
 window/size/borderless=true
 window/size/always_on_top=true
