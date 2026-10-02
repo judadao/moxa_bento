@@ -1,0 +1,14 @@
+.godot/
+.venv/
+__pycache__/
+*.pyc
+output/
+build/
+dist/
+.playwright-cli/
+*.log
+*.tmp
+auth.json
+browser-profile/
+state.json
+command.json
