@@ -31,12 +31,8 @@ def main():
     stop = threading.Event()
     worker = None
     if not args.demo:
-        try:
-            import playwright.sync_api  # noqa: F401
-        except ImportError:
-            parser.error("請先執行 setup-linux.sh 或 setup-windows.bat 安裝訂餐連線工具。")
         from companion.bridge import atomic_json, run
-        atomic_json(folder / "state.json", {"status": "loading", "message": "正在連線訂餐網站…"})
+        atomic_json(folder / "state.json", {"status": "loading", "message": "正在連接瀏覽器擴充功能…"})
         def bridge_worker():
             try:
                 run(folder, stop)

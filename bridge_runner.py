@@ -27,7 +27,7 @@ def main():
     watcher = threading.Thread(target=watch_parent, daemon=True)
     watcher.start()
     try:
-        atomic_json(state_file, {"status": "loading", "message": "已自動啟動查詢工具，正在連接訂餐網站…"})
+        atomic_json(state_file, {"status": "loading", "message": "正在等待原本瀏覽器的訂餐資料…"})
         run(args.data_dir, stop)
     except ImportError:
         atomic_json(state_file, {"status": "error", "message": "缺少查詢套件，請先執行 setup-windows.bat 或 setup-linux.sh。"})

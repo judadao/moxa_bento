@@ -1,0 +1,4 @@
+body{width:320px;margin:0;padding:20px;box-sizing:border-box;background:#1e293e;color:#e7edf3;font:14px/1.65 system-ui,sans-serif}
+.brand{color:#8ad6c2;margin:0 0 12px}h1{font-size:19px;line-height:1.5;margin:0 0 12px}#status{min-height:48px}#checked,.note{font-size:12px;color:#a9b9cc}
+button{display:block;width:100%;margin:9px 0;padding:10px;border:2px solid #8ad6c2;border-radius:7px;background:#8ad6c2;color:#172b34;font:inherit;cursor:pointer}
+button.secondary{background:#28364c;border-color:#526078;color:#e7edf3}button:focus-visible{outline:3px solid #ffe0a0;outline-offset:2px}

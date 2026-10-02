@@ -1,0 +1,33 @@
+{
+  "manifest_version": 3,
+  "name": "便當小夜班・訂餐同步",
+  "version": "0.2.0",
+  "description": "沿用目前瀏覽器的 Moxa 訂餐登入，把午餐預約同步到本機桌面精靈。",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA0IYPwNd7nFj2qk+85Mb0j1lavjMl9KlIkKMR9kZjOysSYjzKlCYSW4BLx7l0rKyYQIDOIhPMcpTP4xzayPkoM9Bba457vzpER6WhkJmjQegG3j8wm4QPGnQVFP5vnYhAhDz91jSNkFOF70aIqJvTa/Fq1e/AhcUCB3neU8mrBxABAGRfUZie7w8/+B/OqSmzPK75R9GkYdHRj81IaqJpuxpbmuahH2YbSIw3ZV9EYi3nkNCsINpP9r0jsr2G1EkIGwq2Bj9c7XMAn/kSZY6aEJLZFJnSv0s1g35mzPpGokrSWxArAK22ivuOO2m+c2VMyrL0d8Qb0G+QaYas31/llQIDAQAB",
+  "permissions": [
+    "nativeMessaging",
+    "alarms",
+    "storage",
+    "scripting"
+  ],
+  "host_permissions": [
+    "https://foodcourt.moxa.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://foodcourt.moxa.com/foodCourt/staff/home*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ]
+}

@@ -1,4 +1,18 @@
-# 2026-10-02 開發檢查點（氣泡互動與直接啟動修正）
+# 2026-10-02 開發檢查點（沿用原本瀏覽器登入）
+
+已將專用 Playwright 瀏覽器改成 Chrome／Edge MV3 擴充功能 + Python Native Messaging。擴充功能從同一瀏覽器的 FoodCourt 頁面做唯讀查詢，只傳必要訂餐欄位；不讀取或保存 Cookie、密碼，不再建立另一套登入 profile。既有分頁不會因背景查詢而重新整理；沒有分頁時自動開啟首頁。精靈「網站／去訂便當」也會使用這個瀏覽器。
+
+執行時僅需 Python 標準函式庫；`setup-linux.sh`／`setup-windows.bat` 註冊目前使用者的本機通道。Linux 本機已執行 `register_native_host.py`。**實際使用仍需在常用瀏覽器手動載入 `extension/` 一次**，固定 ID `ljoghkimjdcdpkpefnkjcicgecegphbj`。瀏覽器和精靈必須在同一台電腦，載入方式見 README。公司網站真實訂單同步、Windows 本機通道尚待實機驗證，沒有宣稱已驗證。
+
+主要變更：`extension/`、`companion/native.py`、`native_host.py`、`register_native_host.py`、`companion/bridge.py`、安裝／啟動／打包腳本、Godot 網站按鈕與字體、README，以及原生通道和瀏覽器整合測試。原來的角色、氣泡、提醒與退出功能保留。
+
+驗證命令：`BENTO_EXTENSION_TEST=1 BENTO_TEST_DISPLAY=:90 DISPLAY=:90 .venv/bin/python -m unittest discover -s tests -v`，**26 個測試全部通過（10.350 秒）**。整合測試用真實 Chromium 擴充功能及 native host，網站、登入 Cookie 與餐點全是隔離的合成資料；覆蓋沿用登入、今日餐點、登入失效／恢復、新分頁自動同步、關閉精靈停止查詢。測試 log：`output/final-tests-90.log`。Godot UI smoke 在 :90 通過，JS syntax checks 通過。
+
+測試以本機 HTTPS fixture 與 Chromium hostname 映射攔住所有 FoodCourt 請求，也停用其他外部 DNS；避免擴充功能開分頁時第一個導覽早於 Playwright route 攔截。憑證與測試 Cookie 只用於暫存的隔離測試 profile。
+
+保留 tmux session：`bento-xvfb-90`，可用 `tmux attach -t bento-xvfb-90` 檢視。完整測試執行於 `bento-final-tests-90-r3`，完成即離開。下一步：使用者載入擴充功能後，核對真實本週午餐與今日餐點；Windows 實機檢查註冊與同步。沒有匯出可執行發行檔。
+
+## 歷史：氣泡互動與直接啟動修正
 
 使用者截圖確認原先「撈不到資料」是直接開 Godot，沒有啟動 Python 查詢工具。已修正：F5 / 直接執行 Godot 自動啟動 `bridge_runner.py`，使用相同本機資料夾與鎖；Godot 結束時 helper 跟著停止。已用真實 Godot → Python 子程序 → 狀態檔整合測試驗證（網路層用合成 fixture）。
 

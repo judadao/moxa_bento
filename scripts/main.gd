@@ -1,6 +1,5 @@
 extends Control
 
-const FOOD_URL = "https://foodcourt.moxa.com/foodCourt/staff/home.action"
 const PALETTE = {"ordered": "#83d4c1", "missing": "#f5b08c", "unknown": "#9babc3", "past": "#68738b"}
 const STATUS_TEXT = {"ordered": "已訂", "missing": "未訂", "unknown": "待確認", "past": "已過"}
 var data_dir := ""
@@ -182,7 +181,7 @@ func _build_ui() -> void:
 	actions_row = HBoxContainer.new()
 	actions_row.add_theme_constant_override("separation", 8)
 	column.add_child(actions_row)
-	var order := _button("去訂便當 ↗", func(): OS.shell_open(FOOD_URL), true)
+	var order := _button("去訂便當 ↗", func(): _command("login"), true)
 	order.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	actions_row.add_child(order)
 	actions_row.add_child(_button("知道了", _snooze))
@@ -202,7 +201,7 @@ func _build_ui() -> void:
 		_render()
 	)
 	settings_row.add_child(week_picker)
-	settings_row.add_child(_button("登入", func(): _command("login")))
+	settings_row.add_child(_button("網站", func(): _command("login")))
 	settings_row.add_child(_button("檢查", func(): _command("refresh")))
 	settings_options = VBoxContainer.new()
 	column.add_child(settings_options)
@@ -243,7 +242,7 @@ func _build_ui() -> void:
 		var button := _button(choice[0], func(): _show_view(destination))
 		button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		menu_controls.add_child(button)
-	menu_controls.add_child(_button("去訂便當 ↗", func(): OS.shell_open(FOOD_URL)))
+	menu_controls.add_child(_button("去訂便當 ↗", func(): _command("login")))
 	menu_controls.add_child(_button("結束精靈", func(): get_tree().quit()))
 	avatar_controls = VBoxContainer.new()
 	avatar_controls.add_theme_constant_override("separation", 8)
@@ -411,7 +410,7 @@ func _command(action: String) -> void:
 		if DirAccess.rename_absolute(path + ".tmp", path) != OK:
 			detail.text = "無法送出檢查，請重新啟動精靈。"
 		else:
-			detail.text = "正在開啟登入視窗…" if action == "login" else "正在重新檢查…"
+			detail.text = "正在原本的瀏覽器開啟訂餐頁…" if action == "login" else "正在請瀏覽器同步午餐…"
 
 func _poll() -> void:
 	if demo:
@@ -434,7 +433,7 @@ func _poll() -> void:
 					last_health = health
 					_render()
 		elif state.is_empty():
-			state = {"status": "setup", "message": "請用啟動腳本執行，再按「登入」連接訂餐網站。"}
+			state = {"status": "setup", "message": "請先執行安裝腳本，並在 Chrome／Edge 載入便當同步擴充功能。"}
 			_render()
 	var now := int(Time.get_unix_time_from_system())
 	if bubble_hide_at > 0 and now >= bubble_hide_at and view in ["summary", "today"]:
